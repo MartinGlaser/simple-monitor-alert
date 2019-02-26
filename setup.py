@@ -20,8 +20,10 @@ import sys
 import uuid
 from simple_monitor_alert.utils.files import makedirs
 
-if hasattr(pip, '__version__') and LooseVersion(pip.__version__) >= LooseVersion('6.0.0'):
+if hasattr(pip, '__version__') and LooseVersion(pip.__version__) >= LooseVersion('6.0.0') and LooseVersion(pip.__version__) <= LooseVersion('9.0.3'):
     from pip.req import parse_requirements
+elif hasattr(pip, '__version__') and LooseVersion(pip.__version__) > LooseVersion('9.0.3'):
+    from pip._internal.req import parse_requirements
 else:
     class FakeReq(object):
         link = None
